@@ -46,10 +46,22 @@ When your backend is ready:
 2. Update `VITE_API_URL` with the actual backend URL
 3. The authentication forms will automatically start making real API calls
 
-## Build
+## Build & Preview
 
 ```bash
+# Build for production
 npm run build
+
+# Preview the built app locally
+npm run preview
 ```
 
-The built files will be in `dist/client/` for frontend deployment.
+## Project Structure
+
+- `src/start.tsx` - Main application entry point
+- `src/router.tsx` - TanStack Router configuration
+- `src/routes/` - Route definitions
+- `src/pages/` - Page components
+- `src/lib/api.ts` - API utility functions
+- `index.html` - HTML template
+- `vercel.json` - Vercel deployment configuration
