@@ -6,6 +6,7 @@ import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { Input } from "@/components/auth/Input";
 import { Button } from "@/components/auth/Button";
+import { authAPI } from "@/lib/api";
 
 interface SignupValues {
   fullName: string;
@@ -26,11 +27,20 @@ export function SignupPage() {
 
   const onSubmit = async (values: SignupValues) => {
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    toast.success("Account created", {
-      description: `Welcome, ${values.fullName.split(" ")[0]}!`,
-    });
+    try {
+      const { confirm, ...signupData } = values;
+      const response = await authAPI.signup(signupData);
+      toast.success("Account created", {
+        description: `Welcome, ${values.fullName.split(" ")[0]}!`,
+      });
+      // TODO: Handle successful signup (redirect to login, auto-login, etc.)
+      console.log("Signup successful:", response);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Signup failed";
+      toast.error("Signup failed", { description: message });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

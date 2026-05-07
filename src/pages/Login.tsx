@@ -6,6 +6,7 @@ import { FiMail, FiLock } from "react-icons/fi";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { Input } from "@/components/auth/Input";
 import { Button } from "@/components/auth/Button";
+import { authAPI } from "@/lib/api";
 
 interface LoginValues {
   email: string;
@@ -22,9 +23,17 @@ export function LoginPage() {
 
   const onSubmit = async (values: LoginValues) => {
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1100));
-    setLoading(false);
-    toast.success("Welcome back!", { description: values.email });
+    try {
+      const response = await authAPI.login(values);
+      toast.success("Welcome back!", { description: values.email });
+      // TODO: Handle successful login (redirect, store auth token, etc.)
+      console.log("Login successful:", response);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Login failed";
+      toast.error("Login failed", { description: message });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
