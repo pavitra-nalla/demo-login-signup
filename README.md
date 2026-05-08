@@ -1,4 +1,4 @@
-# Pastel Bloom Auth
+# DEMO-LOGIN-SIGNUP
 
 A beautiful, calming authentication UI built with React, Vite, and TanStack Router.
 
