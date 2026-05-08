@@ -1,10 +1,10 @@
 const BLOBS = [
   {
-    className: "-top-32 -left-32 h-96 w-96 opacity-60 animate-float",
+    className: "top-0 left-0 h-96 w-96 opacity-60 animate-float",
     color: "#eadbc8",
   },
   {
-    className: "-bottom-40 -right-32 h-[28rem] w-[28rem] opacity-50 animate-float-rev",
+    className: "bottom-0 right-0 h-[28rem] w-[28rem] opacity-50 animate-float-rev",
     color: "#9a8c98",
   },
   {
@@ -15,7 +15,7 @@ const BLOBS = [
 
 export function BackgroundBlobs() {
   return (
-    <>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {BLOBS.map((b, i) => (
         <div
           key={i}
@@ -24,6 +24,6 @@ export function BackgroundBlobs() {
           style={{ background: `radial-gradient(circle, ${b.color} 0%, transparent 70%)` }}
         />
       ))}
-    </>
+    </div>
   );
 }
